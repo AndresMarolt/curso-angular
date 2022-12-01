@@ -1,0 +1,48 @@
+<section  class="w-75 mx-auto">
+
+    <h1 class="text-center mt-5">Alumnos</h1>
+    
+    <div class="row my-5 justify-content-between" style="align-items: center;">
+        <ul class="col-3 bg-light p-3 list-unstyled ">
+            <li *ngFor="let student of students" class="my-3">
+                <p [ngClass]=" student.gradesAverage > 7 ? 'passed' : 'failed' " class="m-0">
+                    Nombre: <strong>{{student.surname | miPipe: 'Mayus'}}</strong> <span>, {{student.name}}</span>
+                </p>
+        
+                <p class="m-0">
+                    Promedio: <strong>{{student.gradesAverage}}</strong>
+                </p>
+            </li>
+        </ul>
+        
+        <div class="col-9">
+            <div class="text-center">
+                <button (click)="showLoadStudent = true" *ngIf="!showLoadStudent" class="bg-dark text-light p-2">Cargar más alumnos</button>
+            </div>
+            
+            <form (ngSubmit)="send()" *ngIf="showLoadStudent" class="col-6 d-flex flex-column gap-1 mt-3 mx-auto">
+                <div>
+                    <label class="d-block" for="">Nombre</label>
+                    <input type="text" class="w-100" name="name" [(ngModel)]="form.name">
+                </div>
+        
+                <div>
+                    <label class="d-block" for="">Apellido</label>
+                    <input type="text" class="w-100" name="surname" [(ngModel)]="form.surname">
+                </div>
+    
+                <div>
+                    <label class="d-block" for="">Promedio</label>
+                    <input type="number" class="w-100" name="gradesAverage" [(ngModel)]="form.gradesAverage">
+                </div>
+
+                <div class="mt-2 d-flex justify-content-around">
+                    <button class="col-5 bg-success text-light border-0 p-2">Enviar</button>
+                    <button class="col-5 bg-secondary text-light border-0 p-2" (click)="showLoadStudent = false">Cerrar</button>
+                </div>            
+            </form>
+        </div>
+    </div>
+    
+    <!-- <button (click)="showStudents()">Mostrar</button> -->
+</section>
