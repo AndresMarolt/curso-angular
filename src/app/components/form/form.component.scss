@@ -1,0 +1,16 @@
+form {
+    background-color: rgb(224, 239, 255);
+    padding: 2rem;
+    border-radius: 10px;
+
+    button {
+        background-color: unset;
+        border: 1px solid blue;
+        border-radius: 10px;
+    }
+
+    .error {
+        color: red;
+        margin: 0;
+    }
+}
