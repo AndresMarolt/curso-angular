@@ -1,0 +1,4 @@
+<div class="col-12 m-0">
+    <app-form [mode]="parentMode" [element]="element" (modeEventForm)="setMode($event)" class="col-12"></app-form>
+    <app-students-list class="col-3" (modeEvent)="setMode($event)" (elementToEdit)="setElement($event)"></app-students-list>
+</div>
