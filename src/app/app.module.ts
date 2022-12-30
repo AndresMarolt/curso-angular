@@ -4,26 +4,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FormComponent } from './components/home/form/form.component';
-import { StudentsListComponent } from './components/home/students-list/students-list.component';
+import { FormComponent } from './shared/components/form/form.component';
+import { StudentsListComponent } from './shared/components/students-list/students-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './modules/material/material.module';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MaterialModule } from './shared/modules/material/material.module';
+import { PageWrapper } from './shared/layout/pageWrapper/page-wrapper.component';
 import { StudentsNamesPipePipe } from './pipes/students-names-pipe.pipe';
 import { HeadingsSizeDirective } from './directives/headings-size.directive';
-import { HomeComponent } from './components/home/home.component';
-
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     FormComponent,
     StudentsListComponent,
-    SidebarComponent,
+    PageWrapper, 
     StudentsNamesPipePipe,
     HeadingsSizeDirective,
-    HomeComponent,
+    DashboardPageComponent,
   ],
   imports: [
     BrowserModule,

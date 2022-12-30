@@ -1,4 +1,4 @@
-export interface DataInterface {
+export interface Student {
     id: number,
     name: string,
     surname: string,

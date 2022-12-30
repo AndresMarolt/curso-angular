@@ -1,6 +1,4 @@
-<h1 appHeadingsSize class="text-center mt-3">App Cursos</h1>
-
-<form [formGroup]="form" (ngSubmit)="submit()" action="" class="col-10 col-sm-8 col-md-6 col-lg-5 col-xl-5 mx-auto mt-5">
+<form [formGroup]="form" (ngSubmit)="submit(form.value)" action="" class="col-10 col-sm-8 col-md-6 col-lg-5 col-xl-5 mx-auto my-5">
     <h3 class="text-center">{{mode}} info de alumno</h3>
 
     <mat-form-field appearance="fill" class="col-12">
@@ -22,6 +20,4 @@
         <button mat-raised-button color="primary" type="submit" class="col-5 p-2" [disabled]="!form.valid">{{mode === 'Editar' ? 'Actualizar' : 'Enviar'}}</button>
         <button mat-raised-button color="warn" type="button" *ngIf="mode === 'Editar'" class="col-5 p-2" (click)="sendMode('Crear')">Cancelar</button>
     </div>
-
 </form>
-
