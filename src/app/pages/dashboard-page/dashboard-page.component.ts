@@ -1,6 +1,7 @@
 import { style } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Student } from 'src/app/interfaces/student-interface';
+import { StudentService } from 'src/app/services/student.service';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -16,7 +17,7 @@ export class DashboardPageComponent {
 
   students: Student[] = JSON.parse(localStorage.getItem('students') || '[]')
 
-  constructor() { }
+  constructor(private studentService: StudentService) { }
 
   setMode(currentMode: any): void {
     this.mode = currentMode;
@@ -28,17 +29,13 @@ export class DashboardPageComponent {
 
   getStudent(student: Student): void {
     if(this.mode === 'Crear') {
-      this.createStudent(student);
+      this.studentService.createStudent(student);
     } else if(this.mode === 'Editar') {
       this.updateStudent(student);
     }
-    localStorage.setItem('students', JSON.stringify(this.students));
   }
 
-  createStudent(student: Student): void {
-    let newId = this.students.length + 1;
-    this.students = [...this.students, {id: newId, name: student.name, surname: student.surname, grade: student.grade}]
-  }
+  
 
   updateStudent(student: Student): void {
     this.students = this.students.map(stu => this.element.id === stu.id ? { ...stu, ...student } : stu);

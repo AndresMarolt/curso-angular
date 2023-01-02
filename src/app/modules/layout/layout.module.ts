@@ -8,8 +8,8 @@ import { PagesModule } from '../pages/pages.module';
   declarations: [PageWrapper],
   imports: [
     CommonModule,
+    MaterialModule,
     PagesModule,
-    MaterialModule
   ], exports: [
     PageWrapper
   ]
