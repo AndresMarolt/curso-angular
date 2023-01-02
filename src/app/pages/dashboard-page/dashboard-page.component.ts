@@ -28,12 +28,20 @@ export class DashboardPageComponent {
 
   getStudent(student: Student): void {
     if(this.mode === 'Crear') {
-      let newId = this.students.length + 1;
-      this.students = [...this.students, {id: newId, name: student.name, surname: student.surname, grade: student.grade}]
+      this.createStudent(student);
     } else if(this.mode === 'Editar') {
-      this.students = this.students.map(stu => this.element.id === stu.id ? { ...stu, ...student } : stu);
+      this.updateStudent(student);
     }
     localStorage.setItem('students', JSON.stringify(this.students));
+  }
+
+  createStudent(student: Student): void {
+    let newId = this.students.length + 1;
+    this.students = [...this.students, {id: newId, name: student.name, surname: student.surname, grade: student.grade}]
+  }
+
+  updateStudent(student: Student): void {
+    this.students = this.students.map(stu => this.element.id === stu.id ? { ...stu, ...student } : stu);
   }
 
   deleteStudent(student: Student): void {
