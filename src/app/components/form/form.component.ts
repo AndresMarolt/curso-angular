@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnChanges, OnInit, SimpleChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Student } from 'src/app/interfaces/student-interface';
-import { v4 as uuidv4 } from 'uuid';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-form',
@@ -9,43 +10,49 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./form.component.scss']
 })
 
-export class FormComponent implements OnInit, OnChanges {
-  public form: FormGroup
+export class FormComponent implements OnInit, OnDestroy {
+  
+  public form: FormGroup;
 
-  @Input() mode: string;
-  @Input() element: any;
+  modeSubscription: Subscription;
+  elementSubscription: Subscription;
 
-  @Output() modeEventForm = new EventEmitter<string>();
-  @Output() sendStudentEvent = new EventEmitter<Student>();
+  public mode: string;
+  public element: Student;
   
   constructor(
-    private fb: FormBuilder
-    ) {  }
-    
-    
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      name: ['', [Validators.required]],
-      surname: ['', [Validators.required]],
-      grade: ['', [Validators.required]]
-    })
-  }
+      private fb: FormBuilder,
+      private studentService: StudentService
+    ) {
+      this.form = this.fb.group({
+        name: ['', [Validators.required]],
+        surname: ['', [Validators.required]],
+        grade: ['', [Validators.required]]
+      })
   
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mode?.currentValue === 'Editar' || changes.element?.currentValue ) {
-      this.form.patchValue(this.element)
+      this.modeSubscription = this.studentService.mode$.subscribe(mode => {
+        this.mode = mode;
+        this.element = this.studentService.element;
+
+        this.mode === 'Crear' ? this.form.reset() : this.form.patchValue(this.studentService.element)
+      })
     }
+      
+  ngOnInit(): void {
+    
+  }
+
+  ngOnDestroy(): void {
+    this.modeSubscription.unsubscribe();
+    this.elementSubscription.unsubscribe();
   }
   
   submit(student: Student): void {
-    this.sendStudentEvent.emit(student);
-    this.form.reset();
-    this.sendMode('Crear')
-  }
-
-  sendMode(mode: string) {
-    this.modeEventForm.emit(mode);
+    this.mode === 'Crear' ? this.studentService.createStudent(student) : this.studentService.updateStudent(student)
     this.form.reset();
   }
 
+  setMode(mode: string): void {
+    this.studentService.setModeObservable(mode)
+  }
 }

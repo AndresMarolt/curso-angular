@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { Student } from 'src/app/interfaces/student-interface';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-students-list',
@@ -7,28 +9,42 @@ import { Student } from 'src/app/interfaces/student-interface';
   styleUrls: ['./students-list.component.scss']
 })
 
-export class StudentsListComponent implements OnInit {
+export class StudentsListComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['ID', 'Alumno', 'Promedio', 'Editar', 'Eliminar'];
-  data = JSON.parse(localStorage.getItem('students') || '{}')
 
-  @Input() students: any;
+  studentsSubscription: Subscription;
+  modeSubscription: Subscription;
 
-  @Output() modeEvent = new EventEmitter<string>();
-  @Output() elementToEditEvent = new EventEmitter<Student>;
-  @Output() elementToDeleteEvent = new EventEmitter<Student>;
+  public students: Student[];
+  public mode: string;
+
+  constructor(public studentService: StudentService) { 
+    this.studentsSubscription = this.studentService.students$.subscribe(students => {
+      this.students = students;
+    })
+  
+    this.modeSubscription = this.studentService.mode$.subscribe(mode => {
+      this.mode = mode
+    })
+  }
 
   ngOnInit(): void {
-    
+  
+  }
+
+  ngOnDestroy(): void {
+    this.studentsSubscription.unsubscribe();
+    this.modeSubscription.unsubscribe();
   }
 
   delete(element: any): void {
-    this.elementToDeleteEvent.emit(element);
-}
+    this.studentService.deleteStudent(element);
+  }
 
-  sendMode(mode: string, element: Student) {
-    this.modeEvent.emit(mode);
-    this.elementToEditEvent.emit(element)
+  setMode(mode: string, element: Student) {
+    this.studentService.setElement(element)
+    this.studentService.setModeObservable(mode);
   }
 
 }

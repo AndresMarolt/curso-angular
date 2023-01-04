@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../interfaces/student-interface';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
 
-  public students: Student[];
-  private studentsSubject: Subject<Student[]> = new Subject();
+  public students: Student[] = JSON.parse(localStorage.getItem('students') || '[]')
+  public element: Student;
 
+  private studentsSubject: BehaviorSubject<Student[]> = new BehaviorSubject(JSON.parse(localStorage.getItem('students') || '[]'));
+  public students$: Observable<Student[]> = this.studentsSubject.asObservable();
+
+  private modeSubject: BehaviorSubject<string> = new BehaviorSubject('Crear');
+  public mode$: Observable<string> = this.modeSubject.asObservable();
+  
   constructor() {
-    this.students = JSON.parse(localStorage.getItem('students') || '[]');
   }
 
   createStudent(student: Student): void {
@@ -22,7 +27,25 @@ export class StudentService {
     this.studentsSubject.next(this.students);
   }
 
-  getStudents(): Observable<Student[]> {
-    return this.studentsSubject.asObservable();
-  } 
+  updateStudent(student: Student): void {
+    this.students = this.students.map(stu => this.element.id === stu.id ? { ...stu, ...student } : stu);
+    localStorage.setItem('students', JSON.stringify(this.students));
+
+    this.studentsSubject.next(this.students);
+  }
+
+  deleteStudent(student: Student): void {
+    this.students = this.students.filter(stu => student.id !== stu.id);
+    localStorage.setItem('students', JSON.stringify(this.students));
+
+    this.studentsSubject.next(this.students)
+  }
+
+  setModeObservable(mode: string): void {
+    this.modeSubject.next(mode);
+  }
+
+  setElement(element: Student): void {
+    this.element = element
+  }
 }
