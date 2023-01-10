@@ -15,7 +15,6 @@ export class FormComponent implements OnInit, OnDestroy {
   public form: FormGroup;
 
   modeSubscription: Subscription;
-  elementSubscription: Subscription;
 
   public mode: string;
   public element: Student;
@@ -27,7 +26,8 @@ export class FormComponent implements OnInit, OnDestroy {
       this.form = this.fb.group({
         name: ['', [Validators.required]],
         surname: ['', [Validators.required]],
-        grade: ['', [Validators.required]]
+        email: ['', [Validators.required]],
+        course: ['', [Validators.required]]
       })
   
       this.modeSubscription = this.studentService.mode$.subscribe(mode => {
@@ -44,7 +44,6 @@ export class FormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.modeSubscription.unsubscribe();
-    this.elementSubscription.unsubscribe();
   }
   
   submit(student: Student): void {

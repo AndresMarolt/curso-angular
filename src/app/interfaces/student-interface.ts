@@ -2,5 +2,6 @@ export interface Student {
     id: number,
     name: string,
     surname: string,
-    grade: number
+    email: string,
+    course: any,
 }

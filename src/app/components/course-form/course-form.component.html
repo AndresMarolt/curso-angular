@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submit(form.value)" action="" class=" my-5">
-    <h3 class="text-center">{{mode}} info de alumno</h3>
+    <h3 class="text-center">{{mode}} curso </h3>
 
     <mat-form-field appearance="fill" class="col-12">
         <mat-label>Nombre</mat-label>
@@ -7,18 +7,13 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="col-12">
-        <mat-label>Apellido</mat-label>
-        <input matInput name="surname" formControlName="surname">
+        <mat-label>Descripción</mat-label>
+        <input matInput name="description" formControlName="description">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="col-12">
-        <mat-label>Email</mat-label>
-        <input matInput name="email" formControlName="email" type="email">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="col-12">
-        <mat-label>Curso</mat-label>
-        <input matInput name="course" formControlName="course">
+        <mat-label>Horas Totales</mat-label>
+        <input matInput name="totalHours" formControlName="totalHours">
     </mat-form-field>
 
     <div class="text-center mt-4 row gap-2 align-items-center justify-content-center">

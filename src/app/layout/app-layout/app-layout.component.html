@@ -1,0 +1,39 @@
+<header>                            <!-- HEADER -->
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="sidenav.toggle()" class="cursor-pointer">menu</mat-icon>
+      <a routerLink="" class="text-decoration-none text-light"><span>Cursos App</span></a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
+
+<mat-sidenav-container class="example-container" >
+    <mat-sidenav #sidenav mode="over" hasBackdrop="true" >
+      <h3 class="fw-bold text-center" appHeadingsSize>Cursos</h3>
+      <mat-list *ngFor="let course of sidenavCourses">
+        <mat-list-item >
+          <a [routerLink]="['courses', course.name]" class="cursor-pointer">{{course.name}}</a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+      </mat-list> 
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+  
+  
+      <main>                              <!-- MAIN -->
+        <div class="main_container">
+          <router-outlet></router-outlet> 
+        </div>
+      </main>
+
+      
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <footer class="text-light">
+    <h3 class="m-0 px-3">
+      Cursos App
+    </h3>
+  </footer>

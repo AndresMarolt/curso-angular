@@ -1,0 +1,22 @@
+<div class="col-12 my-5">
+    <div class="courses_cards-list">
+        <mat-card class="example-card" *ngFor="let element of courses">
+            <mat-card-header>
+              <div mat-card-avatar></div>
+              <mat-card-title>{{element.name}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="https://innovationyourself.com/wp-content/uploads/2020/08/nodejs-logo.png" alt="course_img">
+            <mat-card-content class="mt-2">
+                <mat-card-subtitle>{{element.totalHours}} horas totales</mat-card-subtitle>
+              <p>
+                {{element.description}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <a [routerLink]="['courses', element.name]" class="text-decoration-none mx-auto"><button mat-button class="mx-auto" color="accent">Ver Más</button></a>
+            </mat-card-actions>
+          </mat-card>
+    </div>
+
+
+</div>

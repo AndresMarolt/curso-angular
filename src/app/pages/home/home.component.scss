@@ -1,0 +1,31 @@
+img {
+    height: 680px;
+    padding: 0;
+}
+
+.hero_content {
+    height: 680px;
+    background: url('../../../assets/hero_image.png');
+    background-color: rgb(107, 107, 107);
+    background-blend-mode: multiply;
+    background-size: cover;
+    color: white;
+    
+    .hero_text {
+        position: relative;
+        top: 260px;
+        left: 10%;
+        width: 90%;
+
+        h1 {
+            font-weight: bold;
+            font-size: 4rem;
+            line-height: 50px;
+            // margin-bottom: 2rem;
+        }
+    
+        p {
+            font-size: 1rem;
+        }
+    }
+}

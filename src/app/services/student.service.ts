@@ -21,7 +21,7 @@ export class StudentService {
 
   createStudent(student: Student): void {
     let newId = this.students.length + 1;
-    this.students = [...this.students, {id: newId, name: student.name, surname: student.surname, grade: student.grade}]
+    this.students = [...this.students, {id: newId, name: student.name, surname: student.surname, email: student.email, course: student.course}]
     localStorage.setItem('students', JSON.stringify(this.students));
 
     this.studentsSubject.next(this.students);
@@ -46,6 +46,6 @@ export class StudentService {
   }
 
   setElement(element: Student): void {
-    this.element = element
+    this.element = element;
   }
 }

@@ -11,7 +11,7 @@ import { StudentService } from 'src/app/services/student.service';
 
 export class StudentsListComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['ID', 'Alumno', 'Promedio', 'Editar', 'Eliminar'];
+  displayedColumns: string[] = ['ID', 'Alumno', 'Email', 'Curso', 'Editar', 'Eliminar'];
 
   studentsSubscription: Subscription;
   modeSubscription: Subscription;
@@ -38,7 +38,7 @@ export class StudentsListComponent implements OnInit, OnDestroy {
     this.modeSubscription.unsubscribe();
   }
 
-  delete(element: any): void {
+  delete(element: Student): void {
     this.studentService.deleteStudent(element);
   }
 
