@@ -1,0 +1,31 @@
+<header class="py-3 px-3">
+  <a routerLink="/admin" class="text-decoration-none">
+    <h2 class="m-0 text-light">
+      ADMIN DASHBOARD
+    </h2>
+  </a>
+  
+</header>
+
+<main>
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened class="col-2">
+      <mat-list>
+        <mat-list-item><a routerLink="alumnos" class="text-decoration-none text-dark" >Administrar Alumnos</a></mat-list-item>
+        <mat-list-item><a routerLink="cursos" class="text-decoration-none text-dark" >Administrar Cursos</a></mat-list-item>
+      </mat-list>
+    </mat-drawer>
+  
+    <mat-drawer-content>
+      <div class="main_container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</main>
+
+<footer class="text-light">
+  <h3 class="p-3">
+    ADMIN DASHBOARD
+  </h3>
+</footer>

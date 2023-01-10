@@ -1,0 +1,37 @@
+header {
+    height: 10vh;
+}
+
+mat-sidenav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 85%;
+    padding: 10px;
+}
+
+mat-toolbar-row {
+    height: 10vh;
+}
+
+main {
+    min-height: 80vh;
+}
+
+.main_container {
+    min-height: 80vh;
+    width: 100%;
+    margin: 0;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+footer {
+    height: 10vh;
+    background-color: #673ab7;
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit(form.value)" action="" class=" my-5">
+    <h3 class="text-center">{{mode}} curso </h3>
+
+    <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Nombre</mat-label>
+        <input matInput name="name" formControlName="name" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Descripción</mat-label>
+        <input matInput name="description" formControlName="description">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Horas Totales</mat-label>
+        <input matInput name="totalHours" formControlName="totalHours">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-12">
+        <mat-label>URL de Imagen</mat-label>
+        <input matInput name="image" formControlName="image" >
+    </mat-form-field>
+
+    <div class="text-center mt-4 row gap-2 align-items-center justify-content-center">
+        <button mat-raised-button color="primary" type="submit" class="col-5 p-2" [disabled]="!form.valid">{{mode === 'Editar' ? 'Actualizar' : 'Enviar'}}</button>
+        <button mat-raised-button color="warn" type="button" *ngIf="mode === 'Editar'" class="col-5 p-2" (click)="setMode('Crear')">Cancelar</button>
+    </div>
+</form>
