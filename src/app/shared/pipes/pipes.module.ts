@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StudentsNamesPipePipe } from 'src/app/pipes/students-names-pipe.pipe';
+import { StudentsNamesPipePipe } from './students-names-pipe.pipe';
 
 
 @NgModule({

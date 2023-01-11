@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CourseInterface } from 'src/app/interfaces/course-interface';
+import { CourseInterface } from 'src/app/shared/interfaces/course-interface';
 import { CoursesService } from 'src/app/core/services/courses.service';
 
 @Component({

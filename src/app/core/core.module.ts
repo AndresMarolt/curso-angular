@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from './modules/material.module';
-import { RoutingModule } from './modules/routing.module';
+import { AppRoutingModule } from '../shared/app-routing.module';
 import { StudentService } from './services/student.service';
-import { ComponentsModule } from './components/components.module';
-
+import { ComponentsModule } from '../shared/components/components.module';
+import { LayoutModule } from './layout/layout.module';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MaterialModule,
-    RoutingModule,
+    AppRoutingModule,
     ComponentsModule,
-
+    LayoutModule,
+    PagesModule
   ], providers: [
     StudentService,
+  ],
+  exports: [
+    LayoutModule
   ]
 })
 

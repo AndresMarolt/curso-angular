@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Student } from 'src/app/interfaces/student-interface';
+import { Student } from '../../interfaces/student-interface';
 import { StudentService } from 'src/app/core/services/student.service';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Student } from 'src/app/interfaces/student-interface';
+import { Student } from '../../interfaces/student-interface';
 import { StudentService } from 'src/app/core/services/student.service';
 
 @Component({

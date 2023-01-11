@@ -1,4 +1,3 @@
-import { Student } from "./student-interface";
 
 export interface CourseInterface {
     id: number,
