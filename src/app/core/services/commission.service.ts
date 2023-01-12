@@ -7,18 +7,18 @@ import { BehaviorSubject, Observable } from 'rxjs'
 })
 export class CommissionService {
 
-  public commissions: CommissionInterface[] = JSON.parse(localStorage.getItem('commissions') || `[
-    {id: 1, studentsId: [1, 2], courseId: 1},
-    {id: 2, studentsId: [2, 3], courseId: 2},
-    {id: 3, studentsId: [3, 4], courseId: 3},
-    {id: 4, studentsId: [4, 5], courseId: 4},
-    {id: 5, studentsId: [5, 6], courseId: 5},
-    {id: 6, studentsId: [6, 7], courseId: 6},
-    {id: 7, studentsId: [7, 8], courseId: 7},
-    {id: 8, studentsId: [8, 9], courseId: 8},
-    {id: 9, studentsId: [9, 10], courseId: 9},
-    {id: 10, studentsId: [10, 11], courseId: 10},
-  ]`)
+  public commissions: CommissionInterface[] = [
+    {id: 1, studentsIds: [1, 2], courseId: 1},
+    {id: 2, studentsIds: [2, 3], courseId: 2},
+    {id: 3, studentsIds: [3, 4], courseId: 3},
+    {id: 4, studentsIds: [4, 5], courseId: 4},
+    {id: 5, studentsIds: [5, 6], courseId: 5},
+    {id: 6, studentsIds: [6, 7], courseId: 6},
+    {id: 7, studentsIds: [7, 8], courseId: 7},
+    {id: 8, studentsIds: [8, 9], courseId: 8},
+    {id: 9, studentsIds: [9, 10], courseId: 9},
+    {id: 10, studentsIds: [10, 11], courseId: 10},
+  ]
 
   constructor() { }
 

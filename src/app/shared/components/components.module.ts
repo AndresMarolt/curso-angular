@@ -9,9 +9,11 @@ import { CoursesCardsComponent } from './courses-cards/courses-cards.component';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { RouterModule } from '@angular/router';
+import { CommissionFormComponent } from './commission-form/commission-form.component';
+import { CommissionListComponent } from './commission-list/commission-list.component';
 
 @NgModule({
-  declarations: [FormComponent, StudentsListComponent, CoursesCardsComponent, CourseFormComponent, CoursesListComponent],
+  declarations: [FormComponent, StudentsListComponent, CoursesCardsComponent, CourseFormComponent, CoursesListComponent, CommissionFormComponent, CommissionListComponent, CommissionFormComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -24,7 +26,9 @@ import { RouterModule } from '@angular/router';
     StudentsListComponent,
     CoursesCardsComponent,
     CourseFormComponent,
-    CoursesListComponent
+    CoursesListComponent,
+    CommissionFormComponent,
+    CommissionListComponent
   ]
 })
 export class ComponentsModule { }

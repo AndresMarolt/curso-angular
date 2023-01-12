@@ -5,6 +5,8 @@ import { StudentService } from './services/student.service';
 import { ComponentsModule } from '../shared/components/components.module';
 import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
+import { CoursesService } from './services/courses.service';
+import { CommissionService } from './services/commission.service';
 
 @NgModule({
   declarations: [],
@@ -16,6 +18,8 @@ import { PagesModule } from './pages/pages.module';
     PagesModule
   ], providers: [
     StudentService,
+    CoursesService,
+    CommissionService
   ],
   exports: [
     LayoutModule

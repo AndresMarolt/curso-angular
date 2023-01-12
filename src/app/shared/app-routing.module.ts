@@ -9,6 +9,7 @@ import { DashboardPageComponent } from '../core/pages/admin/dashboard-page/dashb
 import { StudentsPageComponent } from '../core/pages/admin/students-page/students-page.component';
 import { CourseDetailPageComponent } from '../core/pages/course-detail-page/course-detail-page.component';
 import { HomeComponent } from '../core/pages/home/home.component';
+import { CommissionsPageComponent } from '../core/pages/admin/commissions-page/commissions-page.component';
 
 const routes: Routes = [
   { path: '', component: AppLayoutComponent, children: [
@@ -20,7 +21,7 @@ const routes: Routes = [
     { path: '', component: DashboardPageComponent },
     { path: 'alumnos', component: StudentsPageComponent },
     { path: 'cursos', component: CoursesPageComponent },
-    { path: 'form', component: FormComponent}
+    { path: 'comisiones', component: CommissionsPageComponent },
   ] },
 ];
 

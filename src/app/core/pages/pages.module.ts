@@ -7,15 +7,20 @@ import { StudentsPageComponent } from './admin/students-page/students-page.compo
 import { CoursesPageComponent } from './admin/courses-page/courses-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
+import { StudentService } from '../services/student.service';
+import { CoursesService } from '../services/courses.service';
+import { CommissionService } from '../services/commission.service';
+import { CommissionsPageComponent } from './admin/commissions-page/commissions-page.component';
 
 @NgModule({
-  declarations: [DashboardPageComponent, HomeComponent, CourseDetailPageComponent, StudentsPageComponent, CoursesPageComponent],
+  declarations: [DashboardPageComponent, HomeComponent, CourseDetailPageComponent, StudentsPageComponent, CoursesPageComponent, CommissionsPageComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule
-  ], exports: [
+  ],
+  exports: [
     DashboardPageComponent,
     HomeComponent,
     CourseDetailPageComponent,

@@ -3,10 +3,16 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
 
-    img {
-        width: 90%;
-        height: 180px;
-        margin: 0 auto;
+    mat-card {
+        border: 1px solid white;
+        border-radius: 8px;
+
+        img {
+            width: 50%;
+            height: 120px;
+            margin: 0 auto;
+        }
     }
+
 
 }
