@@ -6,7 +6,6 @@ import { ComponentsModule } from '../shared/components/components.module';
 import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
 import { CoursesService } from './services/courses.service';
-import { CommissionService } from './services/commission.service';
 
 @NgModule({
   declarations: [],
@@ -19,7 +18,6 @@ import { CommissionService } from './services/commission.service';
   ], providers: [
     StudentService,
     CoursesService,
-    CommissionService
   ],
   exports: [
     LayoutModule

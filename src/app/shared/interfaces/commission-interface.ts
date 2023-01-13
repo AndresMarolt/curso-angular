@@ -1,5 +1,6 @@
 export interface CommissionInterface {
     id: number,
-    studentsIds: number[],
+    studentsIds: string,
+    teacher: string,
     courseId: number
 }

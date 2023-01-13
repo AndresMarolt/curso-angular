@@ -9,8 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { StudentService } from '../services/student.service';
 import { CoursesService } from '../services/courses.service';
-import { CommissionService } from '../services/commission.service';
 import { CommissionsPageComponent } from './admin/commissions-page/commissions-page.component';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @NgModule({
   declarations: [DashboardPageComponent, HomeComponent, CourseDetailPageComponent, StudentsPageComponent, CoursesPageComponent, CommissionsPageComponent],
@@ -18,7 +18,8 @@ import { CommissionsPageComponent } from './admin/commissions-page/commissions-p
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
+    MaterialModule
   ],
   exports: [
     DashboardPageComponent,

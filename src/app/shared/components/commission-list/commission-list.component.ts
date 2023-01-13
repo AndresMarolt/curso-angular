@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs'
 import { CommissionInterface } from '../../interfaces/commission-interface';
-import { CommissionService } from 'src/app/core/services/commission.service';
+import { CourseInterface } from '../../interfaces/course-interface';
+import { CoursesService } from 'src/app/core/services/courses.service';
 
 @Component({
   selector: 'app-commission-list',
@@ -10,24 +11,26 @@ import { CommissionService } from 'src/app/core/services/commission.service';
 })
 
 export class CommissionListComponent {
-  displayedColumns: string[] = ['ID', 'Ids de Alumnos', 'Id de Curso'];
+  displayedColumns: string[] = ['ID', 'Profesor/a', 'Ids de Alumnos', 'Id de Curso', 'Editar', 'Eliminar'];
 
-  coursesSubscription: Subscription;
   modeSubscription: Subscription;
+  coursesSubscription: Subscription;
 
-  public courses: CommissionInterface[];
+  public courses: CourseInterface[];
+  public commissions: CommissionInterface[];
   public mode: string;
 
-  constructor(public commissionService: CommissionService) {
-    this.coursesSubscription = this.commissionService.commissions$.subscribe(courses => {
-      this.courses = courses;
-      courses.forEach(e => console.log(e))
+  constructor(public courseService: CoursesService) { 
+    let comm;
+
+    this.coursesSubscription = this.courseService.courses$.subscribe(courses => {
+      comm = courses.map(crs => crs.commissions )
+      this.commissions = comm.flat();
+      console.log("CAMBIO");
       
     })
 
-    console.log(this.courses);
-    
-    this.modeSubscription = this.commissionService.mode$.subscribe(mode => {
+    this.modeSubscription = this.courseService.mode$.subscribe(mode => {
       this.mode = mode;
     })
   }
@@ -37,16 +40,17 @@ export class CommissionListComponent {
   }
 
   ngOnDestroy(): void {
-    this.coursesSubscription.unsubscribe();
+
     this.modeSubscription.unsubscribe();
   }
 
-  delete(course: CommissionInterface): void {
-    this.commissionService.deleteCommission(course);
+  delete(element: CommissionInterface): void {
+
+    this.courseService.deleteCommission(element)
   }
 
   setMode(mode: string, element: CommissionInterface) {
-    this.commissionService.setElement(element);
-    this.commissionService.setModeObservable(mode);
+    this.courseService.setElement(element);
+    this.courseService.setModeObservable(mode);
   }
 }

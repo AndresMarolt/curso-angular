@@ -1,3 +1,4 @@
+import { CommissionInterface } from "./commission-interface"
 
 export interface CourseInterface {
     id: number,
@@ -5,5 +6,6 @@ export interface CourseInterface {
     description: string,
     students: number,
     totalHours: number,
-    image: string
+    image: string,
+    commissions: CommissionInterface[];
 }

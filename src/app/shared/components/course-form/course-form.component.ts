@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./course-form.component.scss']
 })
 
-export class CourseFormComponent implements OnInit, OnDestroy {
+export class CourseFormComponent implements OnDestroy {
 
   public form: FormGroup;
 
@@ -35,9 +35,6 @@ export class CourseFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnInit(): void {
-    
-  }
 
   ngOnDestroy(): void {
     this.modeSubscription.unsubscribe()

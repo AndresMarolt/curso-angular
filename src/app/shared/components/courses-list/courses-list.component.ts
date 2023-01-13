@@ -22,8 +22,6 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   constructor(public courseService: CoursesService) {
     this.coursesSubscription = this.courseService.courses$.subscribe(courses => {
       this.courses = courses;
-      courses.forEach(e => console.log(e))
-      
     })
 
     console.log(this.courses);

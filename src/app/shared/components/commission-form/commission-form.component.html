@@ -1,5 +1,14 @@
 <form [formGroup]="form" (ngSubmit)="submit(form.value)" action="" class=" my-5">
-    <h3 class="text-center">{{mode}} curso </h3>
+    <h3 class="text-center">{{mode}} comisión </h3>
+
+    <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Curso</mat-label>
+        <mat-select formControlName="courseId" name="courseId">
+            <mat-option *ngFor="let course of courses" [value]="course.id" >
+                {{course.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
     <mat-form-field appearance="fill" class="col-12">
         <mat-label>Id</mat-label>
@@ -7,13 +16,13 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="col-12">
-        <mat-label>Estudiantes (ids)</mat-label>
-        <input matInput name="studentsIds" formControlName="studentsIds">
+        <mat-label>Profesor/a</mat-label>
+        <input matInput name="teacher" formControlName="teacher" >
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="col-12">
-        <mat-label>Curso (id)</mat-label>
-        <input matInput name="courseId" formControlName="courseId">
+        <mat-label>Ids de Estudiantes (Ej: 1, 5, 9)</mat-label>
+        <input matInput name="studentsIds" formControlName="studentsIds">
     </mat-form-field>
 
     <div class="text-center mt-4 row gap-2 align-items-center justify-content-center">

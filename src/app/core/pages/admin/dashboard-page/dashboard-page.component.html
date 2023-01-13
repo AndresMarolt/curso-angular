@@ -1,21 +1,31 @@
 <div class="p-4 col-12">
     <h1 class="text-center">ADMIN</h1>
 
-    <section class="d-flex mt-5 justify-content-center gap-3" >
-        <div class="col-5 data-card bg-secondary text-light">
-            <h3 class="text-center">Cursos</h3>
+    <section class="d-flex flex-column col-10 mx-auto  mt-5 justify-content-center gap-2 " >
+        
+        <mat-accordion class="example-headers-align " multi *ngFor="let course of courses">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Personal data
+                </mat-panel-title>
+              </mat-expansion-panel-header>
 
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit delectus aliquid, animi vel repudiandae esse ratione modi ullam saepe recusandae voluptatem repellat omnis in ut ea illum tempora culpa illo!
-            </p>
-        </div>
+              <!-- *************************** -->
+              
+            <mat-accordion class="example-headers-align" multi *ngFor="let course of courses">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Personal data
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <!-- *************************** -->
+              
+            </mat-expansion-panel>
+        </mat-accordion>
 
-        <div class="col-5 data-card bg-secondary text-light">
-            <h3 class="text-center">Alumnos</h3>
-
-            <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores quidem quae inventore ullam necessitatibus repellat, numquam temporibus quasi nemo eaque quo voluptas in officiis ad ab odit provident blanditiis unde?
-            </p>
-        </div>
     </section>
 </div>
