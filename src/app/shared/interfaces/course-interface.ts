@@ -7,5 +7,5 @@ export interface CourseInterface {
     students: number,
     totalHours: number,
     image: string,
-    commissions: CommissionInterface[];
+    commissionsIds: number[];
 }

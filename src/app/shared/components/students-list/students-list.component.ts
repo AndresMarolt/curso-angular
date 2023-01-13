@@ -11,7 +11,7 @@ import { StudentService } from 'src/app/core/services/student.service';
 
 export class StudentsListComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['ID', 'Alumno', 'Email', 'Curso', 'Editar', 'Eliminar'];
+  displayedColumns: string[] = ['ID', 'Alumno', 'Email', 'Comision', 'Editar', 'Eliminar'];
 
   studentsSubscription: Subscription;
   modeSubscription: Subscription;

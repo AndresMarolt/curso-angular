@@ -9,18 +9,18 @@ export class StudentService {
 
   // MOCK
   public students: Student[] = [
-    {id: 1, name: 'Fernando', surname: 'Sánchez', email: 'fsanchez@gmail.com', course: 'Node.js'},
-    {id: 2, name: 'Rodrigo', surname: 'Salgueiro', email: 'rsalgueiro@gmail.com', course: 'Node.js'},
-    {id: 3, name: 'Roberto', surname: 'Esipnosa', email: 'respinosa@gmail.com', course: 'Node.js'},
-    {id: 4, name: 'Pablo', surname: 'Ferreyra', email: 'pferreyra@gmail.com', course: 'Node.js'},
-    {id: 5, name: 'Hernán', surname: 'Fernández', email: 'hfernandez@gmail.com', course: 'Node.js'},
-    {id: 6, name: 'José', surname: 'Thomsen', email: 'jthomsen@gmail.com', course: 'Node.js'},
-    {id: 7, name: 'Florencia', surname: 'Docimo', email: 'fdocimo@gmail.com', course: 'Node.js'},
-    {id: 8, name: 'Juan Pablo', surname: 'Vazquez', email: 'jpvazquez@gmail.com', course: 'Node.js'},
-    {id: 9, name: 'Daniela', surname: 'Iñiguez', email: 'diñiguez@gmail.com', course: 'Node.js'},
-    {id: 10, name: 'Martina', surname: 'Méndez', email: 'mmendez@gmail.com', course: 'Node.js'},
-    {id: 11, name: 'Julieta', surname: 'Aiello', email: 'jaiello@gmail.com', course: 'Node.js'},
-  ]
+    {id: 1, name: 'Fernando', surname: 'Sánchez', email: 'fsanchez@gmail.com', commissionId: 1},
+    {id: 2, name: 'Rodrigo', surname: 'Salgueiro', email: 'rsalgueiro@gmail.com', commissionId: 2},
+    {id: 3, name: 'Roberto', surname: 'Esipnosa', email: 'respinosa@gmail.com', commissionId: 3},
+    {id: 4, name: 'Pablo', surname: 'Ferreyra', email: 'pferreyra@gmail.com', commissionId: 4},
+    {id: 5, name: 'Hernán', surname: 'Fernández', email: 'hfernandez@gmail.com', commissionId: 5},
+    {id: 6, name: 'José', surname: 'Thomsen', email: 'jthomsen@gmail.com', commissionId: 6},
+    {id: 7, name: 'Florencia', surname: 'Docimo', email: 'fdocimo@gmail.com', commissionId: 7},
+    {id: 8, name: 'Juan Pablo', surname: 'Vazquez', email: 'jpvazquez@gmail.com', commissionId: 1},
+    {id: 9, name: 'Daniela', surname: 'Iñiguez', email: 'diñiguez@gmail.com', commissionId: 2},
+    {id: 10, name: 'Martina', surname: 'Méndez', email: 'mmendez@gmail.com', commissionId: 3},
+    {id: 11, name: 'Julieta', surname: 'Aiello', email: 'jaiello@gmail.com', commissionId: 4},
+]
   
   public element: Student;
 
@@ -35,7 +35,7 @@ export class StudentService {
 
   createStudent(student: Student): void {
     let newId = this.students.length + 1;
-    this.students = [...this.students, {id: newId, name: student.name, surname: student.surname, email: student.email, course: student.course}]
+    this.students = [...this.students, {id: newId, name: student.name, surname: student.surname, email: student.email, commissionId: student.commissionId}]
     localStorage.setItem('students', JSON.stringify(this.students));
 
     this.studentsSubject.next(this.students);

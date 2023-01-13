@@ -6,6 +6,7 @@ import { Student } from 'src/app/shared/interfaces/student-interface';
 
 import { CoursesService } from 'src/app/core/services/courses.service';
 import { StudentService } from 'src/app/core/services/student.service';
+import { CommissionsService } from 'src/app/core/services/commissions.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -19,8 +20,12 @@ export class DashboardPageComponent {
   public commissions: CommissionInterface[];
   public students: Student[];
 
-  constructor(private studentService: StudentService, private coursesService: CoursesService) { 
+  constructor(private studentService: StudentService, private coursesService: CoursesService, private commissionService: CommissionsService) { 
     this.courses = this.coursesService.courses;
     this.students = this.studentService.students;
+    this.commissions = this.commissionService.commissions;
   }
+
+  
+
 }

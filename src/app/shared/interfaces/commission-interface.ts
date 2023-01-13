@@ -1,6 +1,8 @@
+import { Student } from "./student-interface"
+
 export interface CommissionInterface {
     id: number,
-    studentsIds: string,
+    studentsIds: number[],
     teacher: string,
     courseId: number
 }

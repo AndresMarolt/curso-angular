@@ -27,7 +27,7 @@ export class FormComponent implements OnInit, OnDestroy {
         name: ['', [Validators.required]],
         surname: ['', [Validators.required]],
         email: ['', [Validators.required]],
-        course: ['', [Validators.required]]
+        commissionId: ['', [Validators.required]]
       })
   
       this.modeSubscription = this.studentService.mode$.subscribe(mode => {

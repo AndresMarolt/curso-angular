@@ -4,8 +4,8 @@
     <mat-form-field appearance="fill" class="col-12">
         <mat-label>Curso</mat-label>
         <mat-select formControlName="courseId" name="courseId">
-            <mat-option *ngFor="let course of courses" [value]="course.id" >
-                {{course.name}}
+            <mat-option *ngFor="let commission of commissions" [value]="commission.id" >
+                {{commission.id}}
             </mat-option>
         </mat-select>
     </mat-form-field>
@@ -18,11 +18,6 @@
     <mat-form-field appearance="fill" class="col-12">
         <mat-label>Profesor/a</mat-label>
         <input matInput name="teacher" formControlName="teacher" >
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="col-12">
-        <mat-label>Ids de Estudiantes (Ej: 1, 5, 9)</mat-label>
-        <input matInput name="studentsIds" formControlName="studentsIds">
     </mat-form-field>
 
     <div class="text-center mt-4 row gap-2 align-items-center justify-content-center">

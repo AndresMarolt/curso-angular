@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { CommissionInterface } from '../../interfaces/commission-interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs'
-import { CoursesService } from 'src/app/core/services/courses.service';
-import { CourseInterface } from '../../interfaces/course-interface';
+import { CommissionsService } from 'src/app/core/services/commissions.service';
 
 @Component({
   selector: 'app-commission-form',
@@ -17,25 +16,24 @@ export class CommissionFormComponent {
   public modeSubscription: Subscription;
   
   public mode: string;
-  public courses: CourseInterface[];
+  public commissions: CommissionInterface[];
 
   constructor(
     private fb: FormBuilder,
-    public coursesService: CoursesService
+    public commissionsService: CommissionsService
   ) {
     this.form = this.fb.group({
       id: ['', [Validators.required]],
-      studentsIds: ['', [Validators.required]],
       teacher: ['', [Validators.required]],
       courseId: ['', [Validators.required]]
 
     })
 
-    this.courses = this.coursesService.courses;
+    this.commissions = this.commissionsService.commissions;
 
-    this.modeSubscription = this.coursesService.mode$.subscribe(mode => {
+    this.modeSubscription = this.commissionsService.mode$.subscribe(mode => {
       this.mode = mode;
-      this.mode === 'Crear' ? this.form.reset() : this.form.patchValue(this.coursesService.element)
+      this.mode === 'Crear' ? this.form.reset() : this.form.patchValue(this.commissionsService.element)
     })
   }
 
@@ -44,12 +42,12 @@ export class CommissionFormComponent {
   }
 
   submit(commission: CommissionInterface): void {
-    this.mode === 'Crear' ? this.coursesService.addCommission(commission) : this.coursesService.updateCommission(commission);
+    this.mode === 'Crear' ? this.commissionsService.createCommission(commission) : this.commissionsService.updateCommission(commission);
     
     this.form.reset();
   }
 
   setMode(mode: string): void {
-    this.coursesService.setModeObservable(mode);
+    this.commissionsService.setModeObservable(mode);
   }
 }

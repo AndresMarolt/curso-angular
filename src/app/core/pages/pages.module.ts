@@ -11,6 +11,7 @@ import { StudentService } from '../services/student.service';
 import { CoursesService } from '../services/courses.service';
 import { CommissionsPageComponent } from './admin/commissions-page/commissions-page.component';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [DashboardPageComponent, HomeComponent, CourseDetailPageComponent, StudentsPageComponent, CoursesPageComponent, CommissionsPageComponent],
@@ -19,7 +20,8 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
-    MaterialModule
+    MaterialModule,
+    PipesModule
   ],
   exports: [
     DashboardPageComponent,

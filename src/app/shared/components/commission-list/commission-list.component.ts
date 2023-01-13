@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs'
 import { CommissionInterface } from '../../interfaces/commission-interface';
-import { CourseInterface } from '../../interfaces/course-interface';
 import { CoursesService } from 'src/app/core/services/courses.service';
+import { CommissionsService } from 'src/app/core/services/commissions.service';
 
 @Component({
   selector: 'app-commission-list',
@@ -14,23 +14,17 @@ export class CommissionListComponent {
   displayedColumns: string[] = ['ID', 'Profesor/a', 'Ids de Alumnos', 'Id de Curso', 'Editar', 'Eliminar'];
 
   modeSubscription: Subscription;
-  coursesSubscription: Subscription;
+  commissionsSubscription: Subscription;
 
-  public courses: CourseInterface[];
   public commissions: CommissionInterface[];
   public mode: string;
 
-  constructor(public courseService: CoursesService) { 
-    let comm;
-
-    this.coursesSubscription = this.courseService.courses$.subscribe(courses => {
-      comm = courses.map(crs => crs.commissions )
-      this.commissions = comm.flat();
-      console.log("CAMBIO");
-      
+  constructor(public commissionService: CommissionsService) { 
+    this.commissionsSubscription = this.commissionService.commissions$.subscribe(commissions => {
+      this.commissions = commissions;
     })
 
-    this.modeSubscription = this.courseService.mode$.subscribe(mode => {
+    this.modeSubscription = this.commissionService.mode$.subscribe(mode => {
       this.mode = mode;
     })
   }
@@ -40,17 +34,17 @@ export class CommissionListComponent {
   }
 
   ngOnDestroy(): void {
-
+    this.commissionsSubscription.unsubscribe();
     this.modeSubscription.unsubscribe();
   }
 
   delete(element: CommissionInterface): void {
 
-    this.courseService.deleteCommission(element)
+    this.commissionService.deleteCommission(element)
   }
 
   setMode(mode: string, element: CommissionInterface) {
-    this.courseService.setElement(element);
-    this.courseService.setModeObservable(mode);
+    this.commissionService.setElement(element);
+    this.commissionService.setModeObservable(mode);
   }
 }
