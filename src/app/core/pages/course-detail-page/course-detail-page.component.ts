@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CourseInterface } from 'src/app/shared/interfaces/course-interface';
+import { CoursesService } from '../../services/courses.service';
 
 @Component({
   selector: 'app-course-detail-page',
@@ -7,11 +9,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-detail-page.component.scss']
 })
 export class CourseDetailPageComponent {
-  public courseData: any;
 
-  constructor(public router: ActivatedRoute) { 
+  public courseRouteData: any;
+  public course: CourseInterface;
+
+  constructor(public router: ActivatedRoute, private courseService: CoursesService) { 
     this.router.params.subscribe(element => {
-      this.courseData = element
+      this.courseRouteData = element
+      console.log(this.courseRouteData);
+      this.course = this.courseService.getCourseData(this.courseRouteData.course);
     });
+
   }
+  
 }

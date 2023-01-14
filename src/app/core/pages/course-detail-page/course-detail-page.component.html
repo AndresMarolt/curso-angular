@@ -1,9 +1,19 @@
 <div>
     <div class="background-img">
         <div class="hero-content col-8">
-            <h1 class="fw-bold">Curso de {{courseData.course | titlecase}}</h1>
-    
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam earum, excepturi maxime, aliquid nulla magnam illo ea iusto eum, ipsum quibusdam delectus odit rem ex saepe accusantium reprehenderit nemo suscipit! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quod exercitationem voluptatibus harum ipsam sapiente possimus enim aliquid, atque amet consequuntur laudantium sit aperiam debitis quam nam! Ea, qui repellat.</p>
+            <h1 class="fw-bold">Curso de {{course.name | titlecase}}</h1>
+
+            <p class="fw-light text-light">Carga horaria: {{course.totalHours}} horas totales</p>
         </div>
+    </div>
+
+    <div class="p-5 detail-content">
+        <h3>
+            Acerca de este curso: 
+        </h3>
+
+        <p>
+            {{course.description}}
+        </p>
     </div>
 </div>

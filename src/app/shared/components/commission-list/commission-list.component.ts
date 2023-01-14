@@ -19,7 +19,7 @@ export class CommissionListComponent {
   public commissions: CommissionInterface[];
   public mode: string;
 
-  constructor(public commissionService: CommissionsService) { 
+  constructor(public commissionService: CommissionsService, private courseService: CoursesService) { 
     this.commissionsSubscription = this.commissionService.commissions$.subscribe(commissions => {
       this.commissions = commissions;
     })
@@ -38,9 +38,9 @@ export class CommissionListComponent {
     this.modeSubscription.unsubscribe();
   }
 
-  delete(element: CommissionInterface): void {
-
-    this.commissionService.deleteCommission(element)
+  delete(commission: CommissionInterface): void {
+    this.commissionService.deleteCommission(commission);
+    this.courseService.deleteCourseCommission(commission.courseId, commission.id);
   }
 
   setMode(mode: string, element: CommissionInterface) {

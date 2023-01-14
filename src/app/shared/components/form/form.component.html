@@ -18,7 +18,11 @@
 
     <mat-form-field appearance="fill" class="col-12">
         <mat-label>Comisión</mat-label>
-        <input matInput name="commissionId" formControlName="commissionId">
+        <mat-select formControlName="commissionId" name="commissionId">
+            <mat-option *ngFor="let commission of commissions" [value]="commission.id">
+                {{commission.id}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 
     <div class="text-center mt-4 row gap-2 align-items-center justify-content-center">

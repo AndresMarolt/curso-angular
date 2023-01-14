@@ -31,6 +31,11 @@ export class CoursesService {
   private modeSubject: BehaviorSubject<string> = new BehaviorSubject('Crear');
   public mode$: Observable<string> = this.modeSubject.asObservable();
 
+  getCourseData(courseName: string): any {
+    let searchedCourse = this.courses.find(crs => crs.name === courseName);
+    
+    return searchedCourse || undefined; 
+  }
 
   createCourse(course: CourseInterface): void {
     let newId = this.courses.length + 1;
@@ -52,6 +57,24 @@ export class CoursesService {
     localStorage.setItem('courses', JSON.stringify(this.courses));
 
     this.courseSubject.next(this.courses)
+  }
+
+  addCourseCommission(courseId: number, commissionId: number): void {
+    let course = this.courses.find(crs => crs.id === courseId);
+    course?.commissionsIds.push(commissionId);
+    this.courses.map(crs => crs.id === courseId ? course! : crs);
+    localStorage.setItem('courses', JSON.stringify(this.courses));
+
+    this.courseSubject.next(this.courses);
+  }
+
+  deleteCourseCommission(courseId: number, commissionId: number): void {
+    let course = this.courses.find(crs => crs.id === courseId);
+    course!.commissionsIds = course!.commissionsIds.filter(id => id !== commissionId);
+    this.courses = this.courses.map(crs => crs.id === courseId ? course! : crs);
+    localStorage.setItem('courses', JSON.stringify(this.courses));
+
+    this.courseSubject.next(this.courses);
   }
 
 

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Student } from '../../interfaces/student-interface';
 import { StudentService } from 'src/app/core/services/student.service';
+import { CommissionsService } from 'src/app/core/services/commissions.service';
+import { CommissionInterface } from '../../interfaces/commission-interface';
 
 @Component({
   selector: 'app-form',
@@ -13,6 +15,7 @@ import { StudentService } from 'src/app/core/services/student.service';
 export class FormComponent implements OnInit, OnDestroy {
   
   public form: FormGroup;
+  public commissions: CommissionInterface[];
 
   modeSubscription: Subscription;
 
@@ -21,7 +24,8 @@ export class FormComponent implements OnInit, OnDestroy {
   
   constructor(
       private fb: FormBuilder,
-      private studentService: StudentService
+      private studentService: StudentService,
+      private commissionService: CommissionsService
     ) {
       this.form = this.fb.group({
         name: ['', [Validators.required]],
@@ -36,6 +40,8 @@ export class FormComponent implements OnInit, OnDestroy {
 
         this.mode === 'Crear' ? this.form.reset() : this.form.patchValue(this.studentService.element)
       })
+
+      this.commissions = this.commissionService.commissions;
     }
       
   ngOnInit(): void {
@@ -45,10 +51,16 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.modeSubscription.unsubscribe();
   }
-  
+
   submit(student: Student): void {
-    this.mode === 'Crear' ? this.studentService.createStudent(student) : this.studentService.updateStudent(student)
+    this.mode === 'Crear' ? this.studentService.createStudent(student) : this.studentService.updateStudent(student);
+    
+    this.mode === 'Crear' && this.commissionService.addCommissionStudent(student.commissionId, student.id);
+
     this.form.reset();
+
+    console.log(this.studentService.students);
+    console.log(this.commissionService.commissions);
   }
 
   setMode(mode: string): void {

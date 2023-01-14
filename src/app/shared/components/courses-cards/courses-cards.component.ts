@@ -11,7 +11,7 @@ export class CoursesCardsComponent implements OnDestroy {
 
   public courses: CourseInterface[];
 
-  constructor(public courseService: CoursesService) { 
+  constructor(private courseService: CoursesService) { 
     this.courses = this.courseService.courses;
   }
 

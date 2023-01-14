@@ -51,6 +51,25 @@ export class CommissionsService {
     this.commissionsSubject.next(this.commissions)
   }
 
+  addCommissionStudent(commissionId: number, studentId: number): void {
+    let comm = this.commissions.find(cms => cms.id === commissionId);
+    comm?.studentsIds.push(studentId)
+   
+    this.commissions = this.commissions.map(cms => cms.id === commissionId ? comm! : cms )
+    localStorage.setItem('commissions', JSON.stringify(this.commissions))
+
+    this.commissionsSubject.next(this.commissions)
+  }
+
+  deleteCommissionStudent(commissionId: number, studentId: number): void {
+    let comm = this.commissions.find(cms => cms.id === commissionId);
+    comm!.studentsIds = comm!.studentsIds.filter(id => id !== studentId);
+    this.commissions = this.commissions.map(cms => cms.id === commissionId ? comm! : cms)
+    localStorage.setItem('commissions', JSON.stringify(this.commissions));
+
+    this.commissionsSubject.next(this.commissions);
+  }
+
 
   setModeObservable(mode: string): void {
     this.modeSubject.next(mode);
