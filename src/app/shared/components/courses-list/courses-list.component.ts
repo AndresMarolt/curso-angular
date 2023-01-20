@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CourseInterface } from '../../interfaces/course-interface';
 import { CoursesService } from 'src/app/core/services/courses.service';
+import { CommissionsService } from 'src/app/core/services/commissions.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -19,16 +20,16 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   public courses: CourseInterface[];
   public mode: string;
 
-  constructor(public courseService: CoursesService) {
+  constructor(private courseService: CoursesService, private commissionService: CommissionsService) {
     this.coursesSubscription = this.courseService.courses$.subscribe(courses => {
       this.courses = courses;
     })
 
-    console.log(this.courses);
-    
     this.modeSubscription = this.courseService.mode$.subscribe(mode => {
       this.mode = mode;
     })
+
+
   }
 
   ngOnInit(): void {
@@ -42,6 +43,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 
   delete(course: CourseInterface): void {
     this.courseService.deleteCourse(course);
+    this.commissionService.deleteCourseCommissions(course.commissionsIds);
   }
 
   setMode(mode: string, element: CourseInterface) {

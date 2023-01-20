@@ -19,7 +19,5 @@ export class CourseDetailPageComponent {
       console.log(this.courseRouteData);
       this.course = this.courseService.getCourseData(this.courseRouteData.course);
     });
-
   }
-  
 }

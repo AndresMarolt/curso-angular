@@ -34,8 +34,7 @@ export class StudentService {
   }
 
   createStudent(student: Student): void {
-    let newId = this.students.length + 1;
-    this.students = [...this.students, {id: newId, name: student.name, surname: student.surname, email: student.email, commissionId: student.commissionId}]
+    this.students = [...this.students, {id: student.id, name: student.name, surname: student.surname, email: student.email, commissionId: student.commissionId}]
     localStorage.setItem('students', JSON.stringify(this.students));
 
     this.studentsSubject.next(this.students);

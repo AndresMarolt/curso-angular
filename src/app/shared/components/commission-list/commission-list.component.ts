@@ -30,7 +30,6 @@ export class CommissionListComponent {
   }
 
   ngOnInit(): void {
-    
   }
 
   ngOnDestroy(): void {

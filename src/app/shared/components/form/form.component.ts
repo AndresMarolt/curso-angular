@@ -53,14 +53,18 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   submit(student: Student): void {
-    this.mode === 'Crear' ? this.studentService.createStudent(student) : this.studentService.updateStudent(student);
-    
-    this.mode === 'Crear' && this.commissionService.addCommissionStudent(student.commissionId, student.id);
+    if(this.mode === 'Crear') {
+      let studentId = this.studentService.students.length + 1;
+      let newStudent = {...student, id: studentId};
+      console.log(newStudent);
+
+      this.studentService.createStudent(newStudent)
+      this.commissionService.addCommissionStudent(newStudent.commissionId, newStudent.id);
+    } else {
+      this.studentService.updateStudent(student);
+    }
 
     this.form.reset();
-
-    console.log(this.studentService.students);
-    console.log(this.commissionService.commissions);
   }
 
   setMode(mode: string): void {
