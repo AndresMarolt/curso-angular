@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Student } from '../../interfaces/student-interface';
 import { StudentService } from 'src/app/core/services/student.service';
-import { CommissionsService } from 'src/app/core/services/commissions.service';
-import { CommissionInterface } from '../../interfaces/commission-interface';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +13,6 @@ import { CommissionInterface } from '../../interfaces/commission-interface';
 export class FormComponent implements OnInit, OnDestroy {
   
   public form: FormGroup;
-  public commissions: CommissionInterface[];
 
   modeSubscription: Subscription;
 
@@ -25,13 +22,12 @@ export class FormComponent implements OnInit, OnDestroy {
   constructor(
       private fb: FormBuilder,
       private studentService: StudentService,
-      private commissionService: CommissionsService
     ) {
       this.form = this.fb.group({
+        id: [''],
         name: ['', [Validators.required]],
         surname: ['', [Validators.required]],
         email: ['', [Validators.required]],
-        commissionId: ['', [Validators.required]]
       })
   
       this.modeSubscription = this.studentService.mode$.subscribe(mode => {
@@ -41,7 +37,6 @@ export class FormComponent implements OnInit, OnDestroy {
         this.mode === 'Crear' ? this.form.reset() : this.form.patchValue(this.studentService.element)
       })
 
-      this.commissions = this.commissionService.commissions;
     }
       
   ngOnInit(): void {
@@ -54,12 +49,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   submit(student: Student): void {
     if(this.mode === 'Crear') {
-      let studentId = this.studentService.students.length + 1;
-      let newStudent = {...student, id: studentId};
-      console.log(newStudent);
-
-      this.studentService.createStudent(newStudent)
-      this.commissionService.addCommissionStudent(newStudent.commissionId, newStudent.id);
+      this.studentService.createStudent(student)
     } else {
       this.studentService.updateStudent(student);
     }

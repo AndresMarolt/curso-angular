@@ -23,9 +23,11 @@ export class CourseFormComponent implements OnDestroy {
     private courseService: CoursesService
   ) { 
     this.form = this.fb.group({
+      id: [''],
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       totalHours: ['', [Validators.required]],
+      commissionsIds: [''],
       image: ['', [Validators.required]],
     })
 
@@ -35,13 +37,22 @@ export class CourseFormComponent implements OnDestroy {
     })
   }
 
-
   ngOnDestroy(): void {
     this.modeSubscription.unsubscribe()
   }
 
   submit(course: CourseInterface): void {
-    this.mode === 'Crear' ? this.courseService.createCourse(course) : this.courseService.updateCourse(course);
+    course.commissionsIds = course.commissionsIds.split(',');
+    course.commissionsIds = course.commissionsIds.map((value: any) => Number(value));
+    
+    console.log(course);
+    
+    if(this.mode === 'Crear') {
+      this.courseService.createCourse(course)
+    } else {
+      this.courseService.updateCourse(course);
+    }
+
     this.form.reset();
   }
 

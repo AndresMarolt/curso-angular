@@ -3,5 +3,6 @@ export interface Student {
     name: string,
     surname: string,
     email: string,
-    commissionId: number
+    commissionId: number | null,
+    course: string
 }

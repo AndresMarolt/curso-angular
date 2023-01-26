@@ -1,32 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormComponent } from './components/form/form.component';
+import { HomeRoutingModule } from '../core/pages/app/home/home-routing.module';
+import { CourseDetailPageRoutingModule } from '../core/pages/app/course-detail-page/course-detail-page-routing.module';
+import { AppLayoutRoutingModule } from '../core/layout/app-layout/app-layout-routing.module';
 import { AdminLayoutComponent } from '../core/layout/admin-layout/admin-layout.component';
-import { AppLayoutComponent } from '../core/layout/app-layout/app-layout.component';
+import { AdminLayoutRoutingModule } from '../core/layout/admin-layout/admin-layout-routing.module';
+import { DashboardPageRoutingModule } from '../core/pages/admin/dashboard-page/dashboard-page-routing.module';
+import { StudentsPageRoutingModule } from '../core/pages/admin/students-page/students-page-routing.module';
+import { CoursesPageRoutingModule } from '../core/pages/admin/courses-page/courses-page-routing.module';
 
-import { CoursesPageComponent } from '../core/pages/admin/courses-page/courses-page.component';
-import { DashboardPageComponent } from '../core/pages/admin/dashboard-page/dashboard-page.component';
-import { StudentsPageComponent } from '../core/pages/admin/students-page/students-page.component';
-import { CourseDetailPageComponent } from '../core/pages/course-detail-page/course-detail-page.component';
-import { HomeComponent } from '../core/pages/home/home.component';
-import { CommissionsPageComponent } from '../core/pages/admin/commissions-page/commissions-page.component';
 
 const routes: Routes = [
-  { path: '', component: AppLayoutComponent, children: [
-    { path: '', component: HomeComponent },
-    { path: 'courses/:course', component: CourseDetailPageComponent }
-  ] },
+  { path: '', loadChildren: () => import('../core/layout/app-layout/app-layout-routing.module').then(m => m.AppLayoutRoutingModule) },
 
-  { path: 'admin', component: AdminLayoutComponent, children: [
-    { path: '', component: DashboardPageComponent },
-    { path: 'alumnos', component: StudentsPageComponent },
-    { path: 'cursos', component: CoursesPageComponent },
-    { path: 'comisiones', component: CommissionsPageComponent },
-  ] },
+  { path: 'admin/login', loadChildren: () => import('../core/layout/admin-login-layout/admin-login-layout-routing.module').then(m => m.AdminLoginLayoutRoutingModule) },
+  
+  { path: 'admin', loadChildren: () => import('../core/layout/admin-layout/admin-layout-routing.module').then(m => m.AdminLayoutRoutingModule) },
+
+  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    AppLayoutRoutingModule,
+    AdminLayoutRoutingModule,
+    HomeRoutingModule,
+    CourseDetailPageRoutingModule,
+    DashboardPageRoutingModule,
+    StudentsPageRoutingModule,
+    CoursesPageRoutingModule
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

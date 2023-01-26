@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Student } from 'src/app/shared/interfaces/student-interface';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,50 +9,60 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class StudentService {
 
   // MOCK
-  public students: Student[] = [
-    {id: 1, name: 'Fernando', surname: 'Sánchez', email: 'fsanchez@gmail.com', commissionId: 1},
-    {id: 2, name: 'Rodrigo', surname: 'Salgueiro', email: 'rsalgueiro@gmail.com', commissionId: 2},
-    {id: 3, name: 'Roberto', surname: 'Esipnosa', email: 'respinosa@gmail.com', commissionId: 3},
-    {id: 4, name: 'Pablo', surname: 'Ferreyra', email: 'pferreyra@gmail.com', commissionId: 4},
-    {id: 5, name: 'Hernán', surname: 'Fernández', email: 'hfernandez@gmail.com', commissionId: 5},
-    {id: 6, name: 'José', surname: 'Thomsen', email: 'jthomsen@gmail.com', commissionId: 6},
-    {id: 7, name: 'Florencia', surname: 'Docimo', email: 'fdocimo@gmail.com', commissionId: 7},
-    {id: 8, name: 'Juan Pablo', surname: 'Vazquez', email: 'jpvazquez@gmail.com', commissionId: 1},
-    {id: 9, name: 'Daniela', surname: 'Iñiguez', email: 'diñiguez@gmail.com', commissionId: 2},
-    {id: 10, name: 'Martina', surname: 'Méndez', email: 'mmendez@gmail.com', commissionId: 3},
-    {id: 11, name: 'Julieta', surname: 'Aiello', email: 'jaiello@gmail.com', commissionId: 4},
-]
-  
   public element: Student;
 
-  private studentsSubject: BehaviorSubject<Student[]> = new BehaviorSubject(this.students);
+  private studentsSubject: BehaviorSubject<Student[]> = new BehaviorSubject<Student[]>([]);
   public students$: Observable<Student[]> = this.studentsSubject.asObservable();
 
   private modeSubject: BehaviorSubject<string> = new BehaviorSubject('Crear');
   public mode$: Observable<string> = this.modeSubject.asObservable();
   
-  constructor() {
+  constructor(
+    private httpClient: HttpClient
+  ) {
+    this.getStudentsFromAPI().subscribe(students => {
+      this.studentsSubject.next(students);
+    })
+  }
+
+  getStudentsFromAPI(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>('https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos');
+  }
+
+  getValue(): any {
+    return this.studentsSubject.getValue();
   }
 
   createStudent(student: Student): void {
-    this.students = [...this.students, {id: student.id, name: student.name, surname: student.surname, email: student.email, commissionId: student.commissionId}]
-    localStorage.setItem('students', JSON.stringify(this.students));
+    let newId = this.studentsSubject.getValue().length + 1;
+    let newStudent = {...student, id: newId, commissionId: null};
+    let newList = this.studentsSubject.getValue();
+    
+    this.httpClient.post('https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos', newStudent).subscribe(_ => {
+      newList.push(newStudent);
 
-    this.studentsSubject.next(this.students);
+      console.log("ENVÍO");
+      console.log(newList);
+      
+      this.studentsSubject.next(newList);
+    })
   }
 
   updateStudent(student: Student): void {
-    this.students = this.students.map(stu => this.element.id === stu.id ? { ...stu, ...student } : stu);
-    localStorage.setItem('students', JSON.stringify(this.students));
-
-    this.studentsSubject.next(this.students);
+    let updatedStudent = this.studentsSubject.getValue().find(stu => stu.id === student.id);
+    updatedStudent = {...updatedStudent, ...student}
+    
+    this.httpClient.put(`https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos/${student.id}`, updatedStudent).subscribe(_ => {
+      let newList = this.studentsSubject.getValue().map(stu => stu.id === updatedStudent!.id ? updatedStudent! : stu);
+      this.studentsSubject.next(newList)
+    })
   }
 
   deleteStudent(student: Student): void {
-    this.students = this.students.filter(stu => student.id !== stu.id);
-    localStorage.setItem('students', JSON.stringify(this.students));
-
-    this.studentsSubject.next(this.students)
+    this.httpClient.delete(`https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos/${student.id}`).subscribe(_ => {
+      let newList = this.studentsSubject.getValue().filter(stu => stu.id !== student.id);
+      this.studentsSubject.next(newList);
+    })
   }
 
   setModeObservable(mode: string): void {

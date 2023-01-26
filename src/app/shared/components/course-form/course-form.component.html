@@ -1,6 +1,11 @@
 <form [formGroup]="form" (ngSubmit)="submit(form.value)" action="" class=" my-5">
     <h3 class="text-center">{{mode}} curso </h3>
 
+    <mat-form-field appearance="fill" class="col-12 d-none">
+        <mat-label>Id</mat-label>
+        <input matInput name="name" formControlName="name" >
+    </mat-form-field>
+
     <mat-form-field appearance="fill" class="col-12">
         <mat-label>Nombre</mat-label>
         <input matInput name="name" formControlName="name" >
@@ -14,6 +19,11 @@
     <mat-form-field appearance="fill" class="col-12">
         <mat-label>Horas Totales</mat-label>
         <input matInput name="totalHours" formControlName="totalHours">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="col-12">
+        <mat-label>Comisiones</mat-label>
+        <input matInput name="commissionsIds" formControlName="commissionsIds">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="col-12">

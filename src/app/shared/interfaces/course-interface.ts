@@ -1,4 +1,3 @@
-import { CommissionInterface } from "./commission-interface"
 
 export interface CourseInterface {
     id: number,
@@ -7,5 +6,5 @@ export interface CourseInterface {
     students: number,
     totalHours: number,
     image: string,
-    commissionsIds: number[];
+    commissionsIds: any;
 }

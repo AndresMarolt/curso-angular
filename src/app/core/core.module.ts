@@ -14,7 +14,7 @@ import { CoursesService } from './services/courses.service';
     AppRoutingModule,
     ComponentsModule,
     LayoutModule,
-    PagesModule
+    PagesModule,
   ], providers: [
     StudentService,
     CoursesService,

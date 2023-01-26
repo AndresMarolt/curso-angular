@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CourseInterface } from '../../interfaces/course-interface';
 import { CoursesService } from 'src/app/core/services/courses.service';
-import { CommissionsService } from 'src/app/core/services/commissions.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -12,7 +11,7 @@ import { CommissionsService } from 'src/app/core/services/commissions.service';
 
 export class CoursesListComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['ID', 'Imagen', 'Curso', 'Descripcion', 'Carga Horaria', 'Editar', 'Eliminar'];
+  displayedColumns: string[] = ['ID', 'Imagen', 'Curso', 'Descripcion', 'Carga Horaria', 'Comisiones', 'Editar', 'Eliminar'];
 
   coursesSubscription: Subscription;
   modeSubscription: Subscription;
@@ -20,7 +19,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   public courses: CourseInterface[];
   public mode: string;
 
-  constructor(private courseService: CoursesService, private commissionService: CommissionsService) {
+  constructor(private courseService: CoursesService) {
     this.coursesSubscription = this.courseService.courses$.subscribe(courses => {
       this.courses = courses;
     })
@@ -43,7 +42,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 
   delete(course: CourseInterface): void {
     this.courseService.deleteCourse(course);
-    this.commissionService.deleteCourseCommissions(course.commissionsIds);
+    // this.commissionService.deleteCourseCommissions(course.commissionsIds);
   }
 
   setMode(mode: string, element: CourseInterface) {

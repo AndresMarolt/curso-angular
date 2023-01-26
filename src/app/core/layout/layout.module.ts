@@ -6,15 +6,22 @@ import { PagesModule } from '../pages/pages.module';
 import { RouterModule } from '@angular/router';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { AppRoutingModule } from 'src/app/shared/app-routing.module';
+import { AdminLayoutModule } from './admin-layout/admin-layout.module';
+import { AppLayoutModule } from './app-layout/app-layout.module';
+import { AdminLoginLayoutComponent } from './admin-login-layout/admin-login-layout.component';
 
 @NgModule({
-  declarations: [AdminLayoutComponent, AppLayoutComponent],
+  declarations: [
+    AdminLoginLayoutComponent
+  ],
   imports: [
     MaterialModule,
     CommonModule,
     PagesModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AdminLayoutModule,
+    AppLayoutModule
   ], exports: [
     AdminLayoutComponent,
     AppLayoutComponent

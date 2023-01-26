@@ -4,31 +4,44 @@ import { FormComponent } from './form/form.component';
 import { StudentsListComponent } from './students-list/students-list.component';
 import { MaterialModule } from '../modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PipesModule } from '../pipes/pipes.module';
 import { CoursesCardsComponent } from './courses-cards/courses-cards.component';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { RouterModule } from '@angular/router';
-import { CommissionFormComponent } from './commission-form/commission-form.component';
-import { CommissionListComponent } from './commission-list/commission-list.component';
+import { CourseFormModule } from './course-form/course-form.module';
+import { CoursesCardsModule } from './courses-cards/courses-cards.module';
+import { CoursesListModule } from './courses-list/courses-list.module';
+import { FormModule } from './form/form.module';
+import { StudentsListModule } from './students-list/students-list.module';
+import { InscriptionFormComponent } from './inscription-form/inscription-form.component';
+import { InscriptionFormModule } from './inscription-form/inscription-form.module';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginFormModule } from './login-form/login-form.module';
 
 @NgModule({
-  declarations: [FormComponent, StudentsListComponent, CoursesCardsComponent, CourseFormComponent, CoursesListComponent, CommissionFormComponent, CommissionListComponent, CommissionFormComponent],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    PipesModule,
-    RouterModule
+    RouterModule,
+    CourseFormModule,
+    CoursesCardsModule,
+    CoursesCardsModule,
+    CoursesListModule,
+    FormModule,
+    StudentsListModule,
+    InscriptionFormModule,
+    LoginFormModule
   ], exports: [
     FormComponent,
     StudentsListComponent,
     CoursesCardsComponent,
-    CourseFormComponent,
     CoursesListComponent,
-    CommissionFormComponent,
-    CommissionListComponent
+    CourseFormComponent,
+    InscriptionFormComponent
   ]
 })
 export class ComponentsModule { }

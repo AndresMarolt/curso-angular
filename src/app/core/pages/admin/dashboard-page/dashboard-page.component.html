@@ -11,28 +11,24 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             
-            <div *ngFor="let commission of commissions">
-                <mat-accordion *ngIf="course.commissionsIds.includes(commission.id)">
+            <div *ngFor="let commissionId of course.commissionsIds">
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <p>Comisión {{commission.id}}</p>
+                                <p>Comisión {{commissionId}}</p>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
 
                         <div>
-                            <p class="fw-bold">PROFESOR: <span class="fw-normal">{{commission.teacher}}</span> </p>
                             <p class="fw-bold">ALUMNOS</p>
                             <ul *ngFor="let student of students">
-                                <li *ngIf="commission.studentsIds.includes(student.id)" class="list-unstyled">
+                                <li *ngIf="+student.commissionId! === commissionId" class="list-unstyled">
                                     <p>{{student | studentsNamesPipe}}</p>
                                 </li>
                             </ul>
-
+                            
                         </div>
                     </mat-expansion-panel>
-                </mat-accordion>            
-
             </div>
         </mat-expansion-panel>
     </mat-accordion>
