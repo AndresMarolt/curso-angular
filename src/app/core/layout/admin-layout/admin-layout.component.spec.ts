@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageWrapper } from './admin-layout.component';
+import { AdminLayoutComponent } from './admin-layout.component';
 
 describe('SidebarComponent', () => {
-  let component: PageWrapper;
-  let fixture: ComponentFixture<PageWrapper>;
+  let component: AdminLayoutComponent;
+  let fixture: ComponentFixture<AdminLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageWrapper ]
+      declarations: [ AdminLayoutComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PageWrapper);
+    fixture = TestBed.createComponent(AdminLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

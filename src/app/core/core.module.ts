@@ -6,6 +6,7 @@ import { ComponentsModule } from '../shared/components/components.module';
 import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
 import { CoursesService } from './services/courses.service';
+import { AdminLoginService } from './services/admin-login.service';
 
 @NgModule({
   declarations: [],
@@ -18,6 +19,7 @@ import { CoursesService } from './services/courses.service';
   ], providers: [
     StudentService,
     CoursesService,
+    AdminLoginService
   ],
   exports: [
     LayoutModule

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { InscriptionFormModule } from 'src/app/shared/components/inscription-form/inscription-form.module';
 
 import { InscriptionsPageComponent } from './inscriptions-page.component';
 
@@ -8,7 +9,10 @@ describe('InscriptionsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InscriptionsPageComponent ]
+      declarations: [ InscriptionsPageComponent ],
+      imports: [
+        InscriptionFormModule
+      ]
     })
     .compileComponents();
 
