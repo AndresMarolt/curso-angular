@@ -6,7 +6,7 @@ import { StudentsPageComponent } from './students-page.component';
 const routes: Routes = [
   {
     path: 'alumnos',
-    component: StudentsPageComponent
+    component: StudentsPageComponent,
   }
 ]
 

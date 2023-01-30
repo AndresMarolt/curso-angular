@@ -9,14 +9,16 @@ import { DashboardPageRoutingModule } from '../core/pages/admin/dashboard-page/d
 import { StudentsPageRoutingModule } from '../core/pages/admin/students-page/students-page-routing.module';
 import { CoursesPageRoutingModule } from '../core/pages/admin/courses-page/courses-page-routing.module';
 
+import { IsAuthenticatedGuard } from '../core/guards/is-authenticated.guard';
+
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('../core/layout/app-layout/app-layout-routing.module').then(m => m.AppLayoutRoutingModule) },
 
   { path: 'admin/login', loadChildren: () => import('../core/layout/admin-login-layout/admin-login-layout-routing.module').then(m => m.AdminLoginLayoutRoutingModule) },
   
-  { path: 'admin', loadChildren: () => import('../core/layout/admin-layout/admin-layout-routing.module').then(m => m.AdminLayoutRoutingModule) },
-
+  { path: 'admin', loadChildren: () => import('../core/layout/admin-layout/admin-layout-routing.module').then(m => m.AdminLayoutRoutingModule),
+  canActivate: [IsAuthenticatedGuard]},
   
 ];
 

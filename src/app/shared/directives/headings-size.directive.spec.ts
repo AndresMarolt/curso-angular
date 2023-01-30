@@ -12,7 +12,7 @@ export class TestComponent {
 }
 
 
-fdescribe('HeadingsSizeDirective', () => {
+describe('HeadingsSizeDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let inputEl: DebugElement;

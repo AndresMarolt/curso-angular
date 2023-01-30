@@ -21,17 +21,13 @@ export class StudentService {
   constructor(
     private httpClient: HttpClient
   ) {
-    this.getStudentsFromAPI().subscribe(students => {
-      this.studentsSubject.next(students);
+    this.getStudentsFromAPI().subscribe(stu => {
+      this.studentsSubject.next(stu);
     })
   }
 
   getStudentsFromAPI(): Observable<Student[]> {
     return this.httpClient.get<Student[]>('https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos');
-  }
-
-  getValue(): any {
-    return this.studentsSubject.getValue();
   }
 
   createStudent(student: Student): void {
@@ -41,29 +37,19 @@ export class StudentService {
     
     this.httpClient.post('https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos', newStudent).subscribe(_ => {
       newList.push(newStudent);
-
-      console.log("ENVÍO");
-      console.log(newList);
-      
       this.studentsSubject.next(newList);
     })
   }
 
-  updateStudent(student: Student): void {
+  updateStudent(student: Student): Observable<Object> {
     let updatedStudent = this.studentsSubject.getValue().find(stu => stu.id === student.id);
     updatedStudent = {...updatedStudent, ...student}
     
-    this.httpClient.put(`https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos/${student.id}`, updatedStudent).subscribe(_ => {
-      let newList = this.studentsSubject.getValue().map(stu => stu.id === updatedStudent!.id ? updatedStudent! : stu);
-      this.studentsSubject.next(newList)
-    })
+    return this.httpClient.put(`https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos/${student.id}`, updatedStudent)
   }
 
-  deleteStudent(student: Student): void {
-    this.httpClient.delete(`https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos/${student.id}`).subscribe(_ => {
-      let newList = this.studentsSubject.getValue().filter(stu => stu.id !== student.id);
-      this.studentsSubject.next(newList);
-    })
+  deleteStudent(student: Student): Observable<Object> {
+    return this.httpClient.delete(`https://63cc20169b72d2a88e0893c6.mockapi.io/alumnos/${student.id}`)
   }
 
   setModeObservable(mode: string): void {

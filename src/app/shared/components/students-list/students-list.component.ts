@@ -29,6 +29,8 @@ export class StudentsListComponent implements OnInit, OnDestroy {
       this.students = students;
     } );
 
+
+    // --------------------------
     this.coursesSubscription = this.courseService.courses$.subscribe(courses => this.courses = courses);
 
     this.modeSubscription = this.studentService.mode$.subscribe(mode => {
@@ -47,7 +49,11 @@ export class StudentsListComponent implements OnInit, OnDestroy {
   }
 
   delete(student: Student): void {
-    this.studentService.deleteStudent(student);
+    this.studentService.deleteStudent(student).subscribe(_ => {
+      const tempArr = this.students.filter(stu => stu.id !== student.id);
+      this.students = [...tempArr];
+      
+    })
     // this.commissionService.deleteCommissionStudent(student.commissionId, student.id);
   }
 
