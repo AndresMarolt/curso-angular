@@ -8,6 +8,8 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+
  
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     SharedModule,
     CoreModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule,
+    StoreModule.forRoot({}, {})
 
   ],
   providers: [],
